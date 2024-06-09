@@ -12,7 +12,8 @@ const schema = a.schema({
       id: a.id(),
       patId: a.integer(),
       value : a.integer(),
-    }),
+    })
+    .authorization((allow) => [allow.publicApiKey()]),
 
     Medicine : a
     .model({
@@ -20,7 +21,8 @@ const schema = a.schema({
       patId: a.integer(),
       drId: a.integer(),
       value : a.integer(),
-    }),
+    })
+    .authorization((allow) => [allow.publicApiKey()]),
 
   Todo: a
     .model({
