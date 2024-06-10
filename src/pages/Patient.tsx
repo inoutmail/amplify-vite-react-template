@@ -1,31 +1,29 @@
-import {useEffect, useState} from "react";
+import { useEffect } from "react";
 import type { Schema } from "../amplify/data/resource";
 import { generateClient } from "aws-amplify/data";
 
 const client = generateClient<Schema>();
-const Patient = () => {
 
-    const [measure, setMeasure] = useState(0);
-    const [measures, setMeasures] = useState<Array<Schema["Measure"]["type"]>>([]);
+function Home() {
+  //const [todos, setTodos] = useState<Array<Schema["Todo"]["type"]>>([]);
+
+  useEffect(() => {
+    // client.models.Todo.observeQuery().subscribe({
+    //   next: (data) => setTodos([...data.items]),
+    // });
+  }, []);
+
+  function createTodo() {
+    client.models.Todo.create({ content: window.prompt("My Measure (from Device):") });
+  }
+
+  return (
+    <main>
+      <h1>Patient - My Measure</h1>
+      <button onClick={createTodo}>Add Measure</button>
+    </main>
+  );
+}
 
 
-    useEffect(() => {
-      client.models.Measure.observeQuery().subscribe({
-        next: (data) => setMeasures([...data.items]),
-      });
-    }, []);
-
-    function createMeasure() {
-      client.models.Measure.create({ patId : 1, value : measure });
-    }
-
-    return (
-      <main>
-        <h1>Measure</h1>
-        <input value={measure} onChange={(e) => setMeasure(Number(e.target.value))}  />
-        <button onClick={createMeasure}>Submit Measure</button>
-      </main>
-    );
-  };
-  
-  export default Patient;
+  export default Home;

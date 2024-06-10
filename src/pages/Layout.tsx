@@ -12,7 +12,7 @@ const Layout = () => {
             <Link to="/patient">Patient</Link>
           </li>
           <li>
-            <Link to="/doctor">Doctor</Link>
+            <Link to="/doctor">Physician</Link>
           </li>
         </ul>
       </nav>
